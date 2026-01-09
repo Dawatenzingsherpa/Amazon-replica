@@ -41,6 +41,10 @@ export function checkProductExistsInCart(id){
       }
     });
     cart = newCart;
+    
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    
+    container.remove();
    
   }
 
