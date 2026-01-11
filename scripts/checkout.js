@@ -1,4 +1,4 @@
-import { cart,removeFromCart,cartQuantityAmount} from "../data/cart.js";
+import { cart,removeFromCart,cartQuantityAmount,updateQuantity} from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -30,17 +30,19 @@ cart.forEach((cartItem)=>{
         <div class="cart-item-details">
           <div class="product-name">
             ${matchingProduct.name}
-          </div>
+          </div> 
           <div class="product-price">
             ${formatCurrency(matchingProduct.priceCents)}
           </div>
           <div class="product-quantity">
             <span>
-              Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+              Quantity: <span class="quantity-label js-quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
             </span>
-            <span class="update-quantity-link link-primary">
+            <span class="update-quantity-link link-primary js-update-link"data-product-id="${matchingProduct.id}">
               Update
             </span>
+            <input class ="quantity-input js-quantity-input-${matchingProduct.id}">
+            <span class="save-quantity-link link-primary js-save-quantity"data-product-id="${matchingProduct.id}">Save</span>
             <span class="delete-quantity-link link-primary js-delete-link "data-product-id="${matchingProduct.id}">
               Delete
             </span>
@@ -111,9 +113,47 @@ cart.forEach((cartItem)=>{
       console.log(cart);
       
     })
-  })
+  });
+
+
+
+
+  document.querySelectorAll(".js-update-link")
+    .forEach((link)=>{
+      link.addEventListener('click',()=>{
+        const productId = link.dataset.productId;
+        const container = document.querySelector(`.js-cart-item-container-${productId}`)
+        container.classList.add('is-editing-quantity');
+        console.log(container.classList);
+      })
+    })
+
+
+document.querySelectorAll('.js-save-quantity')
+    .forEach((link)=>{
+      const productId = link.dataset.productId;
+      const inputQuantity =  document.querySelector(`.js-quantity-input-${productId}`);
+     
+      inputQuantity.addEventListener('keydown',(event)=>{
+          if(event.key === 'Enter'){
+            updatingQuantity(productId);
+            inputQuantity.value = '';
+          }
+        })
+
+      link.addEventListener('click',()=>{
+        updatingQuantity(productId);
+        inputQuantity.value = '';
+        });
+      
+      
+    } )
+
+
 
 checkoutHeaderQuantity();
+
+
 function checkoutHeaderQuantity(){
 if(cartQuantityAmount()=== 0){
   document.querySelector('.js-checkout-cart-quantity')
@@ -124,3 +164,28 @@ if(cartQuantityAmount()=== 0){
   console.log(cartQuantityAmount());
 }
 }
+
+function updatingQuantity(productId){
+  const container = document.querySelector(`.js-cart-item-container-${productId}`);
+  container.classList.remove('is-editing-quantity');
+  const newQuantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
+
+  if(newQuantity >= 0 && newQuantity < 1000){
+    updateQuantity(productId,newQuantity);
+    document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity;
+    checkoutHeaderQuantity();
+
+  }else{
+    
+    alert('please enter value between 0 and 999');
+    return;
+    
+  }
+  
+
+
+    
+  
+  
+}
+
