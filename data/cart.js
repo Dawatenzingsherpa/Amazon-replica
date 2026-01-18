@@ -35,7 +35,7 @@ export function checkProductExistsInCart(id){
           productId : id,
           quantity : 1,
           deliveryOptionId : '1'
-
+          
         })
       
     }
