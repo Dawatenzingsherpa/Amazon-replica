@@ -82,7 +82,7 @@ export function renderOrderSummary(){
         const productId = link.dataset.productId;
         removeFromCart(productId);
         checkoutHeaderQuantity();
-        
+        renderPaymentSummary();
         
       })
     });
@@ -110,12 +110,14 @@ export function renderOrderSummary(){
             if(event.key === 'Enter'){
               updatingQuantity(productId);
               inputQuantity.value = '';
+              renderPaymentSummary();
             }
           })
 
         link.addEventListener('click',()=>{
           updatingQuantity(productId);
           inputQuantity.value = '';
+          renderPaymentSummary();
           });
         
         
