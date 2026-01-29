@@ -18,7 +18,7 @@ function saveToStorage(){
 
 export function checkProductExistsInCart(id){
   let matchingItem;
-  
+  const selectQuantity = Number(document.querySelector(`.js-select-${id}`).value);
   
     cart.forEach((product)=>{
       if(product.productId == id){
@@ -26,14 +26,14 @@ export function checkProductExistsInCart(id){
       }
     })
     if (matchingItem){
-      matchingItem.quantity += 1;
+      matchingItem.quantity += selectQuantity;
       
 
     }else {
     
       cart.push({
           productId : id,
-          quantity : 1,
+          quantity : selectQuantity,
           deliveryOptionId : '1'
           
         })
