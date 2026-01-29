@@ -88,7 +88,8 @@ function addToCartQuantity(){
   document.querySelector('.js-cart-quantity')
   .innerHTML = cartQuantity;
 }
- 
+
+addToCartQuantity();
      
   
  
