@@ -1,4 +1,5 @@
 import { products } from "./products.js";
+import { deliveryOptions } from "./deliveryOptions.js";
 export let cartQuantity = 0;
 
 
@@ -91,13 +92,27 @@ export function updateQuantity(productId,newQuantity){
 
 export function updateDeliveryOption(productId,deliveryOptionId){
   let matchingItem;
+  let matchingId;
 
   cart.forEach((cartItem)=>{
     if(productId === cartItem.productId){
       matchingItem = cartItem;
     }
+    
   });
+  deliveryOptions.forEach((deliveryOption)=>{
+    if(deliveryOption.id==deliveryOptionId){
+      matchingId = deliveryOptionId;
+    }
+  })
+  if(!matchingId){
+    return;
+  }
 
-  matchingItem.deliveryOptionId = deliveryOptionId;
+  if(!matchingItem){
+    return;
+  }
+
+  matchingItem.deliveryOptionId = matchingId;
   saveToStorage();
 }
