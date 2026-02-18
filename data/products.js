@@ -54,7 +54,7 @@ class Clothing extends Product{
     return `<a href = "images/clothing-size-chart.png" target="_blank">Size Chart</a>`;
   }
 }
-const tshirt = new Clothing({
+/*const tshirt = new Clothing({
     id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
     image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
     name: "Adults Plain Cotton T-Shirt - 2 Pack",
@@ -70,10 +70,9 @@ const tshirt = new Clothing({
     ],
     type: "clothing",
     sizeChartLink: "images/clothing-size-chart.png"
-  });
+  });*/
 
-  console.log(tshirt);
-  console.log(tshirt.getPrice());
+  
 
 export const products = [
   {
