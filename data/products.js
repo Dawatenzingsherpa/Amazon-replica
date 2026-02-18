@@ -12,7 +12,7 @@ export function getProduct(productId){
   return matchingProduct;
 }
 
-class Product{
+export class Product{
   id;
   name;
   image;
@@ -42,10 +42,12 @@ class Product{
   }
 }
 
-class Clothing extends Product{
+export class Clothing extends Product{
+  type;
   sizeChartLink;
   constructor(productDetails){
     super(productDetails);
+    this.type = productDetails.type;
     this.sizeChartLink = productDetails.sizeChartLink;
 
   }
@@ -72,7 +74,7 @@ class Clothing extends Product{
     sizeChartLink: "images/clothing-size-chart.png"
   });*/
 
-class Appliance extends Product{
+export class Appliance extends Product{
     type;
     instructionsLink;
     warrentyLink;
