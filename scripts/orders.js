@@ -1,4 +1,4 @@
-import { checkProductExistsInCart,cart } from "../data/cart.js";
+import { checkProductExistsInCart,cartQuantityAmount} from "../data/cart.js";
 import { orders } from "../data/orders.js";
 import { getProduct,loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
@@ -116,6 +116,10 @@ document.querySelectorAll('.js-buy-again-button')
       
     })
   })
+
+
+document.querySelector('.js-cart-quantity')
+  .innerHTML = cartQuantityAmount();
 
 
  
