@@ -131,3 +131,16 @@ if(calculateProgress()<50){
   document.querySelector('.js-delivered')
     .classList.add("current-status");
 }
+
+
+
+document.querySelector('.js-search-button')
+  .addEventListener('click',()=>{
+    const inputvalue = document.querySelector('.js-search-bar')
+    .value;
+    window.location.href = `amazon.html?search=${inputvalue}`;
+    
+  })
+
+
+  
