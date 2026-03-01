@@ -5,6 +5,8 @@ import { formatCurrency } from "./utils/money.js";
 
 await loadProductsFetch();
 
+
+
 let html = '';
 
 function renderOrderHTML(){
@@ -120,6 +122,9 @@ document.querySelectorAll('.js-buy-again-button')
 
 document.querySelector('.js-cart-quantity')
   .innerHTML = cartQuantityAmount();
+
+
+  
 
 
  
