@@ -124,6 +124,9 @@ document.querySelector('.js-cart-quantity')
   .innerHTML = cartQuantityAmount();
 
 
+
+
+
   
 
 

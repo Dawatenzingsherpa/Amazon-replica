@@ -68,21 +68,27 @@ export function renderPaymentSummary(){
   document.querySelector('.js-payment-summary')
     .innerHTML = productSummaryHTML;
 
+  
   document.querySelector('.js-place-order')
     .addEventListener('click',async ()=>{
+      
       try{
         //throw 'error';
         const response = await fetch('https://supersimplebackend.dev/orders',{
           method : 'POST',
           headers : {
-            'content-Type':'application/json'
+            'Content-Type':'application/json'
           },
           body: JSON.stringify({
             cart: cart
           })
         });
+        
         const order = await response.json();
+       
         addOrder(order);
+        
+        
       }catch (error){
         console.log('Unexpected error.please try again later');
       }
