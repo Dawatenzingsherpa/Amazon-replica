@@ -41,19 +41,19 @@ const html = `
       <img class="product-image" src="${product.image}">
 
       <div class="progress-labels-container">
-        <div class="progress-label">
+        <div class="progress-label js-preparing">
           Preparing
         </div>
-        <div class="progress-label current-status">
+        <div class="progress-label js-shipped">
           Shipped
         </div>
-        <div class="progress-label">
+        <div class="progress-label js-delivered">
           Delivered
         </div>
       </div>
 
       <div class="progress-bar-container">
-        <div class="progress-bar"></div>
+        <div class="progress-bar js-progress-bar" style="width:${calculateProgress()}%"></div>
       </div>
     
 
@@ -97,3 +97,37 @@ deliveryDate();
 
 document.querySelector('.js-cart-quantity')
   .innerHTML = cartQuantityAmount();
+
+
+function calculateProgress(){
+  let deliveryTime;
+
+  order.products.forEach((orderProduct)=>{
+    if(orderProduct.productId=== product.id){
+      const delivery = orderProduct.estimatedDeliveryTime;
+      deliveryTime = new Date(delivery);
+    }})
+
+  const currentTime = new Date();
+  const orderTime = new Date(order.orderTime);
+
+  const progress = ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
+
+  
+
+ 
+  return progress;
+
+}
+
+
+if(calculateProgress()<50){
+  document.querySelector('.js-preparing')
+    .classList.add("current-status");
+}else if(calculateProgress()>=50 && calculateProgress < 100){
+  document.querySelector('.js-shipped')
+    .classList.add("current-status");
+}else{
+  document.querySelector('.js-delivered')
+    .classList.add("current-status");
+}
