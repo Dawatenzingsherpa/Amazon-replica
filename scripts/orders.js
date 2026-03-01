@@ -1,3 +1,4 @@
+import { checkProductExistsInCart,cart } from "../data/cart.js";
 import { orders } from "../data/orders.js";
 import { getProduct,loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
@@ -73,7 +74,7 @@ function productHTML(order){
         <div class="product-quantity">
           Quantity: ${orderProduct.quantity}
         </div>
-        <button class="buy-again-button button-primary">
+        <button class="buy-again-button button-primary js-buy-again-button" data-product-id="${orderProduct.productId}">
           <img class="buy-again-icon" src="images/icons/buy-again.png">
           <span class="buy-again-message">Buy it again</span>
         </button>
@@ -105,6 +106,16 @@ orders.forEach((order)=>{
   })
 })
 */
+
+
+document.querySelectorAll('.js-buy-again-button')
+  .forEach((button)=>{
+    button.addEventListener('click',()=>{
+      const productId = button.dataset.productId;
+      checkProductExistsInCart(productId);
+      
+    })
+  })
 
 
  
