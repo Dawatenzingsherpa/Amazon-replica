@@ -138,7 +138,7 @@ document.querySelector('.js-search-button')
   .addEventListener('click',()=>{
     const inputvalue = document.querySelector('.js-search-bar')
     .value;
-    window.location.href = `amazon.html?search=${inputvalue}`;
+    window.location.href = `amazon.html?search=${inputvalue.toLowerCase()}`;
     
   })
 
